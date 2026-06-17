@@ -27,14 +27,14 @@ export default function Navbar() {
             {!user ? (
               <>
                 <Link
-                  href="/login"
+                  href="/signin"
                   className="px-4 py-2 bg-blue-500 text-white rounded"
                 >
                   Login
                 </Link>
 
                 <Link
-                  href="/register"
+                  href="/signup"
                   className="px-4 py-2 border rounded"
                 >
                   Register

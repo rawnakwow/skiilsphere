@@ -1,48 +1,52 @@
-import courses from "@/data/courses.json";
-import { notFound } from "next/navigation";
+"use client";
 
-export default function CourseDetails({
-  params,
-}) {
-  const course = courses.find(
-    (item) =>
-      item.id === Number(params.id)
-  );
+import { courses } from "@/data/courses";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+export default function CourseDetails({ params }) {
+  const router = useRouter();
+  const [course, setCourse] = useState(null);
 
-  if (!course) {
-    notFound();
-  }
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    // 🔐 PROTECTION
+    if (!token) {
+      router.push("/signin");
+      return;
+    }
+
+    const found = courses.find(
+      (c) => c.id === parseInt(params.id)
+    );
+
+    setCourse(found);
+  }, []);
+
+  if (!course) return <p>Loading...</p>;
 
   return (
-    <div className="max-w-5xl mx-auto p-6">
+    <div className="p-6">
 
-      <img
+      <h1 className="text-3xl font-bold">{course.title}</h1>
+
+      <Image
         src={course.image}
         alt={course.title}
-        className="w-full rounded-xl"
+        className="w-full h-60 object-cover mt-4"
       />
 
-      <h1 className="text-4xl font-bold mt-6">
-        {course.title}
-      </h1>
+      <p className="mt-4">{course.description}</p>
 
-      <p className="mt-4">
-        {course.description}
-      </p>
+      <h2 className="mt-4 font-bold">Curriculum</h2>
+      <ul className="list-disc ml-6">
+        <li>Introduction</li>
+        <li>Core Concepts</li>
+        <li>Practical Projects</li>
+        <li>Final Exam</li>
+      </ul>
 
-      <div className="mt-6">
-        <h2 className="text-2xl font-semibold">
-          Curriculum
-        </h2>
-
-        <ul className="list-disc ml-6 mt-4">
-          <li>Introduction</li>
-          <li>Core Concepts</li>
-          <li>Hands-on Projects</li>
-          <li>Advanced Topics</li>
-          <li>Final Assessment</li>
-        </ul>
-      </div>
     </div>
   );
 }

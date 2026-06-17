@@ -1,24 +1,18 @@
 import "./globals.css";
-import { Toaster } from "react-hot-toast";
-import Navbar from "@/components/shared/Navbar";
-import Footer from '@/components/shared/Footer'; // Note the { }
+import ToastProvider from "@/context/ToastContext";
 
-export const metadata = {
-  title: "SkillSphere",
-  description: "Online Learning Platform",
-};
+import Navbar from "@/components/shared/Navbar";
+import Footer from "@/components/shared/Footer";
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body>
-        <Navbar/>
-        <main className="min-h-screen">
+        <ToastProvider>
+          <Navbar />
           {children}
-        </main>
-        <Footer> </Footer>
-
-        <Toaster position="top-right" />
+          <Footer />
+        </ToastProvider>
       </body>
     </html>
   );

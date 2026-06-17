@@ -1,0 +1,4 @@
+export const getCourses = async () => {
+  const res = await fetch("http://localhost:5000/courses");
+  return res.json();
+};

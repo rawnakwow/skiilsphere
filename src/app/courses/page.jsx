@@ -1,45 +1,36 @@
-"use client";
-
-import { useState } from "react";
-import courses from "@/data/courses.json";
-import CourseCard from "@/components/courses/CourseCard";
+import { courses } from "@/data/courses";
+import Link from "next/link";
 
 export default function CoursesPage() {
-  const [search, setSearch] = useState("");
-
-  const filteredCourses = courses.filter((course) =>
-    course.title
-      .toLowerCase()
-      .includes(search.toLowerCase())
-  );
-
   return (
-    <div className="max-w-7xl mx-auto px-4 py-10">
+    <div className="p-6">
 
-      <h1 className="text-4xl font-bold mb-6">
-        All Courses
-      </h1>
+      <h1 className="text-2xl font-bold mb-4">All Courses</h1>
 
-      <input
-        type="text"
-        placeholder="Search course..."
-        value={search}
-        onChange={(e) =>
-          setSearch(e.target.value)
-        }
-        className="w-full border p-3 rounded-lg mb-8"
-      />
+      <div className="grid md:grid-cols-3 gap-4">
+        {courses.map((course) => (
+          <div key={course.id} className="border p-4 rounded">
 
-      <div className="grid md:grid-cols-3 gap-6">
+            <img
+              src={course.image}
+              className="h-40 w-full object-cover"
+            />
 
-        {filteredCourses.map((course) => (
-          <CourseCard
-            key={course.id}
-            course={course}
-          />
+            <h2 className="font-bold mt-2">{course.title}</h2>
+            <p>{course.instructor}</p>
+            <p>⭐ {course.rating}</p>
+
+            <Link
+              href={`/courses/${course.id}`}
+              className="text-blue-600"
+            >
+              Details
+            </Link>
+
+          </div>
         ))}
-
       </div>
+
     </div>
   );
 }
