@@ -1,98 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+// 1. Removed CardBody and CardHeader from HeroUI imports
+import { Card } from "@heroui/react";
+import { motion } from "framer-motion";
+import RegisterForm from "@/components/auth/RegisterForm";
+import { Suspense } from "react";
+import Loader from "@/components/shared/Loader";
 
-export default function SignupPage() {
-  const router = useRouter();
-
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    password: "",
-    photo: "",
-  });
-
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
-
-  const handleSignup = async (e) => {
-    e.preventDefault();
-
-    const res = await fetch("/api/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      toast.error(data.message || "Signup failed");
-      return;
-    }
-
-    toast.success("Account created successfully!");
-    router.push("/signin");
-  };
-
+export default function SignUp() {
   return (
-    <div className="min-h-screen flex items-center justify-center px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/20 blur-[100px] pointer-events-none"></div>
+      
+      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md z-10 py-8">
+        <Card className="w-full shadow-2xl border border-divider/50 bg-background/60 backdrop-blur-xl">
+          
+          {/* 2. Replaced legacy <CardHeader> with <Card.Header> */}
+          <Card.Header className="flex flex-col gap-1 text-center pt-8 pb-4">
+            <h1 className="text-3xl font-extrabold tracking-tight">Create Account</h1>
+            <p className="text-default-500 text-sm">Join SkillSphere and start your learning journey today.</p>
+          </Card.Header>
 
-      <form
-        onSubmit={handleSignup}
-        className="w-full max-w-md border p-6 rounded-xl shadow"
-      >
-        <h1 className="text-3xl font-bold mb-6 text-center">
-          Sign Up
-        </h1>
+          {/* 3. Replaced legacy <CardBody> with <Card.Content> */}
+          <Card.Content className="px-8 pb-8">
+            <Suspense fallback={<Loader />}>
+              <RegisterForm />
+            </Suspense>
+          </Card.Content>
 
-        <input
-          name="name"
-          placeholder="Name"
-          onChange={handleChange}
-          className="w-full border p-3 mb-3 rounded"
-        />
-
-        <input
-          name="email"
-          placeholder="Email"
-          onChange={handleChange}
-          className="w-full border p-3 mb-3 rounded"
-        />
-
-        <input
-          name="photo"
-          placeholder="Photo URL"
-          onChange={handleChange}
-          className="w-full border p-3 mb-3 rounded"
-        />
-
-        <input
-          name="password"
-          type="password"
-          placeholder="Password"
-          onChange={handleChange}
-          className="w-full border p-3 mb-3 rounded"
-        />
-
-        <button
-          type="submit"
-          className="w-full bg-green-600 text-white py-3 rounded"
-        >
-          Create Account
-        </button>
-
-        <p className="text-center mt-4 text-sm">
-          Already have an account?{" "}
-          <a href="/signin" className="text-blue-600">
-            Sign In
-          </a>
-        </p>
-      </form>
-
+        </Card>
+      </motion.div>
     </div>
   );
 }

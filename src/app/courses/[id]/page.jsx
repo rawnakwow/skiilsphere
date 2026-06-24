@@ -1,52 +1,66 @@
 "use client";
 
-import { courses } from "@/data/courses";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-export default function CourseDetails({ params }) {
-  const router = useRouter();
-  const [course, setCourse] = useState(null);
+import { useParams } from "next/navigation";
+import CourseDetailsComponent from "@/components/courses/CourseDetails";
+import Curriculum from "@/components/courses/Curriculum";
+import ProtectedRoute from "@/components/shared/ProtectedRoute";
+import { FaCheckCircle } from "react-icons/fa";
+// 1. Removed Divider from the HeroUI imports
+import { useCourses } from "@/hooks/useCourses";
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
+export default function CourseDetails() {
+  const { id } = useParams();
+  const { getCourseById } = useCourses();
+  const course = getCourseById(id);
 
-    // 🔐 PROTECTION
-    if (!token) {
-      router.push("/signin");
-      return;
-    }
+  if (!course) return null; // Let Loader from ProtectedRoute handle initial state if needed
 
-    const found = courses.find(
-      (c) => c.id === parseInt(params.id)
-    );
-
-    setCourse(found);
-  }, []);
-
-  if (!course) return <p>Loading...</p>;
+  const curriculumList = [
+    "Introduction to the Course",
+    "Setting up the Environment",
+    "Core Concepts & Fundamentals",
+    "Advanced Techniques",
+    "Building a Real-World Project",
+    "Deployment and Best Practices"
+  ];
 
   return (
-    <div className="p-6">
+    <ProtectedRoute>
+      <div className="min-h-screen bg-background pb-20">
+        <CourseDetailsComponent course={course} />
 
-      <h1 className="text-3xl font-bold">{course.title}</h1>
-
-      <Image
-        src={course.image}
-        alt={course.title}
-        className="w-full h-60 object-cover mt-4"
-      />
-
-      <p className="mt-4">{course.description}</p>
-
-      <h2 className="mt-4 font-bold">Curriculum</h2>
-      <ul className="list-disc ml-6">
-        <li>Introduction</li>
-        <li>Core Concepts</li>
-        <li>Practical Projects</li>
-        <li>Final Exam</li>
-      </ul>
-
-    </div>
+        <div className="max-w-7xl mx-auto px-6 mt-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+          <div className="md:col-span-2">
+            <Curriculum items={curriculumList} />
+          </div>
+          
+          <div className="md:col-span-1">
+            <h2 className="text-2xl font-bold mb-6">What you will learn</h2>
+            <ul className="space-y-4">
+              {[1, 2, 3, 4].map((_, i) => (
+                <li key={i} className="flex items-start gap-3">
+                  <FaCheckCircle className="text-success mt-1 shrink-0" />
+                  <span className="text-default-600">Master the core concepts and principles of {course.category.toLowerCase()}.</span>
+                </li>
+              ))}
+            </ul>
+            
+            {/* 2. Replaced legacy <Divider /> with a styled native HTML <hr /> tag */}
+            <hr className="w-full border-t border-divider opacity-50 my-8" />
+            
+            <h2 className="text-2xl font-bold mb-4">Instructor</h2>
+            <div className="flex items-center gap-4 bg-content1 p-4 rounded-xl border border-divider">
+              <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center text-xl font-bold text-primary">
+                {course.instructor.charAt(0)}
+              </div>
+              <div>
+                <h4 className="font-bold text-lg">{course.instructor}</h4>
+                <p className="text-default-500 text-sm">Senior Professional</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ProtectedRoute>
   );
 }

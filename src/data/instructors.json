@@ -1,0 +1,30 @@
+[
+  {
+    "id": 1,
+    "name": "John Doe",
+    "specialty": "Full-Stack Web Development",
+    "rating": 4.9,
+    "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23006fee'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='bold' font-size='64' fill='white'>JD</text></svg>"
+  },
+  {
+    "id": 2,
+    "name": "Jane Smith",
+    "specialty": "UI/UX Design",
+    "rating": 4.8,
+    "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%237828c8'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='bold' font-size='64' fill='white'>JS</text></svg>"
+  },
+  {
+    "id": 3,
+    "name": "Alice Johnson",
+    "specialty": "Digital Marketing",
+    "rating": 4.7,
+    "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%23f31262'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='bold' font-size='64' fill='white'>AJ</text></svg>"
+  },
+  {
+    "id": 4,
+    "name": "Robert Brown",
+    "specialty": "Data Science",
+    "rating": 4.9,
+    "image": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><rect width='100%' height='100%' fill='%2317c964'/><text x='50%' y='55%' dominant-baseline='middle' text-anchor='middle' font-family='system-ui,sans-serif' font-weight='bold' font-size='64' fill='white'>RB</text></svg>"
+  }
+]

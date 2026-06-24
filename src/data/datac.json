@@ -1,0 +1,142 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "title": "Complete Web Development Bootcamp",
+      "instructor": "John Doe",
+      "duration": "20 hours",
+      "rating": 4.8,
+      "level": "Beginner",
+      "description": "Learn full-stack web development from scratch. Master HTML, CSS, JavaScript, React, Node.js, and MongoDB.",
+      "image": "https://via.placeholder.com/400x250?text=Web+Development",
+      "category": "Development",
+      "price": "$89.99",
+      "students": 15420,
+      "curriculum": [
+        "Introduction to HTML & CSS",
+        "JavaScript Fundamentals",
+        "React.js Basics",
+        "Node.js & Express",
+        "MongoDB & Databases",
+        "Building REST APIs",
+        "Authentication & Security",
+        "Deployment & DevOps"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "UI/UX Design Masterclass",
+      "instructor": "Sarah Smith",
+      "duration": "15 hours",
+      "rating": 4.9,
+      "level": "Intermediate",
+      "description": "Master the art of user interface and user experience design with Figma and modern design principles.",
+      "image": "https://via.placeholder.com/400x250?text=UI+UX+Design",
+      "category": "Design",
+      "price": "$79.99",
+      "students": 12350,
+      "curriculum": [
+        "Design Fundamentals",
+        "Color Theory & Typography",
+        "Figma Basics",
+        "Wireframing & Prototyping",
+        "User Research Methods",
+        "Design Systems",
+        "Responsive Design",
+        "Portfolio Building"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Digital Marketing Strategy",
+      "instructor": "Mike Johnson",
+      "duration": "12 hours",
+      "rating": 4.7,
+      "level": "All Levels",
+      "description": "Learn comprehensive digital marketing strategies including SEO, social media, content marketing, and analytics.",
+      "image": "https://via.placeholder.com/400x250?text=Digital+Marketing",
+      "category": "Marketing",
+      "price": "$69.99",
+      "students": 18900,
+      "curriculum": [
+        "Marketing Fundamentals",
+        "SEO & Keyword Research",
+        "Social Media Marketing",
+        "Content Marketing Strategy",
+        "Email Marketing",
+        "Google Analytics",
+        "Paid Advertising",
+        "Marketing Automation"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Data Science with Python",
+      "instructor": "Emily Chen",
+      "duration": "25 hours",
+      "rating": 4.6,
+      "level": "Advanced",
+      "description": "Dive into data science with Python. Learn pandas, numpy, machine learning, and data visualization.",
+      "image": "https://via.placeholder.com/400x250?text=Data+Science",
+      "category": "Development",
+      "price": "$99.99",
+      "students": 8750,
+      "curriculum": [
+        "Python Programming Basics",
+        "NumPy & Pandas",
+        "Data Cleaning & Preparation",
+        "Data Visualization",
+        "Statistical Analysis",
+        "Machine Learning Basics",
+        "Deep Learning Introduction",
+        "Capstone Project"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Mobile App Development",
+      "instructor": "Alex Rodriguez",
+      "duration": "18 hours",
+      "rating": 4.5,
+      "level": "Intermediate",
+      "description": "Build iOS and Android apps with React Native. Create cross-platform mobile applications.",
+      "image": "https://via.placeholder.com/400x250?text=Mobile+Apps",
+      "category": "Development",
+      "price": "$84.99",
+      "students": 11200,
+      "curriculum": [
+        "React Native Setup",
+        "Components & Navigation",
+        "State Management",
+        "API Integration",
+        "Push Notifications",
+        "App Store Deployment",
+        "Performance Optimization",
+        "Testing & Debugging"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Graphic Design Essentials",
+      "instructor": "Lisa Wang",
+      "duration": "10 hours",
+      "rating": 4.4,
+      "level": "Beginner",
+      "description": "Learn graphic design fundamentals using Adobe Creative Suite and create stunning visual content.",
+      "image": "https://via.placeholder.com/400x250?text=Graphic+Design",
+      "category": "Design",
+      "price": "$59.99",
+      "students": 15600,
+      "curriculum": [
+        "Design Principles",
+        "Adobe Photoshop Basics",
+        "Adobe Illustrator",
+        "Typography Design",
+        "Logo Design",
+        "Brand Identity",
+        "Print Design",
+        "Digital Graphics"
+      ]
+    }
+  ]
+}

@@ -1,82 +1,103 @@
 "use client";
 
-import Link from "next/link";
 import { useState } from "react";
+import Link from "next/link";
+import { authClient } from "@/lib/auth-client";
+import { Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function Navbar() {
-  const [menuOpen, setMenuOpen] = useState(false);
+  const { data: session, isPending } = authClient.useSession();
+  const router = useRouter();
 
-  const user = null; // replace later with auth user
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/signin");
+        },
+      },
+    });
+  };
 
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex justify-between items-center h-16">
-          <Link
-            href="/"
-            className="text-2xl font-bold text-blue-600"
-          >
+    <header className="sticky top-0 z-50 w-full border-b border-b-divider bg-background/70 backdrop-blur-md">
+      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+        
+        {/* Brand Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="font-extrabold text-2xl tracking-tighter bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
             SkillSphere
           </Link>
-
-          <div className="hidden md:flex gap-6 items-center">
-            <Link href="/">Home</Link>
-            <Link href="/courses">Courses</Link>
-            <Link href="/my-profile">My Profile</Link>
-
-            {!user ? (
-              <>
-                <Link
-                  href="/signin"
-                  className="px-4 py-2 bg-blue-500 text-white rounded"
-                >
-                  Login
-                </Link>
-
-                <Link
-                  href="/signup"
-                  className="px-4 py-2 border rounded"
-                >
-                  Register
-                </Link>
-              </>
-            ) : (
-              <button className="px-4 py-2 bg-red-500 text-white rounded">
-                Logout
-              </button>
-            )}
-          </div>
-
-          <button
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="md:hidden text-2xl"
-          >
-            ☰
-          </button>
         </div>
 
-        {menuOpen && (
-          <div className="md:hidden flex flex-col gap-4 pb-4">
-            <Link href="/">Home</Link>
-            <Link href="/courses">Courses</Link>
-            <Link href="/my-profile">My Profile</Link>
+        {/* Center Desktop Links */}
+        <nav className="hidden sm:flex items-center gap-8">
+          <Link href="/" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+            Home
+          </Link>
+          <Link href="/courses" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
+            Courses
+          </Link>
+        </nav>
+        
+        {/* Right Side Actions / Dropdown Profile Container */}
+        <div className="flex items-center gap-4">
+          {isPending ? (
+            <div className="w-8 h-8 rounded-full bg-default-200 animate-pulse"></div>
+          ) : session ? (
+            /* CLEANED UP: Single clean Dropdown wrapper with no nested duplicates */
+            <Dropdown placement="bottom-end">
+              <DropdownTrigger asChild>
+                <div 
+                  role="button"
+                  tabIndex={0}
+                  className="flex items-center justify-center p-1 border-2 border-primary rounded-full hover:opacity-80 transition-opacity focus:outline-none shrink-0 cursor-pointer"
+                >
+                  <Image
+                    className="w-8 h-8 rounded-full object-cover shrink-0"
+                    alt={session.user.name || "User profile"}
+                    src={
+                      session.user.image ||
+                      `https://ui-avatars.com{encodeURIComponent(
+                        session.user.name || "User"
+                      )}&background=6c63ff&color=fff`
+                    }
+                    width={32}
+                    height={32}
+                    unoptimized
+                  />
+                </div>
+              </DropdownTrigger>
 
-            <Link
-              href="/login"
-              className="px-4 py-2 bg-blue-500 text-white rounded text-center"
-            >
-              Login
-            </Link>
+              {/* SINGLE ALIGNED MENU: Correct width and layout padding configuration attributes */}
+              <DropdownMenu aria-label="Profile Actions" variant="faded" className="w-56">
+                <DropdownItem key="profile" className="h-14 gap-2 border-b border-b-divider/50 rounded-none pointer-events-none">
+                  <p className="text-xs font-normal text-default-400">Signed in as</p>
+                  <p className="text-sm font-semibold text-foreground truncate max-w-[200px]">{session.user.email}</p>
+                </DropdownItem>
+                <DropdownItem key="my-profile" onClick={() => router.push("/my-profile")} className="mt-1">
+                  My Profile
+                </DropdownItem>
+                <DropdownItem key="logout" color="danger" className="text-danger" onClick={handleLogout}>
+                  Log Out
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          ) : (
+            <div className="flex items-center gap-4">
+              <Link href="/signin" className="hidden lg:inline-block hover:text-primary transition-colors font-medium text-sm">
+                Login
+              </Link>
+              <Button as={Link} color="primary" href="/signup" variant="shadow" className="font-medium text-sm">
+                Sign Up
+              </Button>
+            </div>
+          )}
+        </div>
 
-            <Link
-              href="/register"
-              className="px-4 py-2 border rounded text-center"
-            >
-              Register
-            </Link>
-          </div>
-        )}
       </div>
-    </nav>
+    </header>
   );
 }

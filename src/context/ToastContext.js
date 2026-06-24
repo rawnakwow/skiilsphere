@@ -1,15 +1,27 @@
 "use client";
 
-import { createContext } from "react";
-import { Toaster } from "react-hot-toast";
+import { createContext, useContext, useCallback } from "react";
+import { toast } from "react-toastify";
 
-export const ToastContext = createContext();
+const ToastContext = createContext(null);
 
-export default function ToastProvider({ children }) {
+export function ToastProvider({ children }) {
+  const showSuccess = useCallback((msg) => toast.success(msg), []);
+  const showError   = useCallback((msg) => toast.error(msg),   []);
+  const showInfo    = useCallback((msg) => toast.info(msg),    []);
+  const showWarning = useCallback((msg) => toast.warning(msg), []);
+
   return (
-    <ToastContext.Provider value={{}}>
+    <ToastContext.Provider value={{ showSuccess, showError, showInfo, showWarning }}>
       {children}
-      <Toaster position="top-right" />
     </ToastContext.Provider>
   );
+}
+
+export function useToast() {
+  const context = useContext(ToastContext);
+  if (!context) {
+    throw new Error("useToast must be used within a ToastProvider");
+  }
+  return context;
 }

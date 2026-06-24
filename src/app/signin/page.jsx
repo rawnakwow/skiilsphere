@@ -1,70 +1,37 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import toast from "react-hot-toast";
+// 1. Removed CardBody and CardHeader from the main import destructurer
+import { Card } from "@heroui/react";
+import { motion } from "framer-motion";
+import LoginForm from "@/components/auth/LoginForm";
+import { Suspense } from "react";
+import Loader from "@/components/shared/Loader";
 
-export default function SigninPage() {
-  const router = useRouter();
-
-  const [form, setForm] = useState({
-    email: "",
-    password: "",
-  });
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    const res = await fetch("/api/auth/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(form),
-    });
-
-    const data = await res.json();
-
-    if (!res.ok) {
-      toast.error(data.message);
-      return;
-    }
-
-    // store session
-    localStorage.setItem("token", data.token);
-    localStorage.setItem("user", JSON.stringify(data.user));
-
-    toast.success("Login successful!");
-
-    router.push("/");
-  };
-
+export default function SignIn() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <form onSubmit={handleLogin} className="w-96 border p-6">
+    <div className="min-h-screen flex items-center justify-center bg-background p-4 relative overflow-hidden">
+      {/* Decorative background elements */}
+      <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[100px] pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/20 blur-[100px] pointer-events-none"></div>
+      
+      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="w-full max-w-md z-10">
+        <Card className="w-full shadow-2xl border border-divider/50 bg-background/60 backdrop-blur-xl">
+          
+          {/* 2. Replaced <CardHeader> with <Card.Header> */}
+          <Card.Header className="flex flex-col gap-1 text-center pt-8 pb-4">
+            <h1 className="text-3xl font-extrabold tracking-tight">Welcome Back</h1>
+            <p className="text-default-500 text-sm">Sign in to your SkillSphere account to continue learning.</p>
+          </Card.Header>
 
-        <h1 className="text-2xl mb-4">Login</h1>
+          {/* 3. Replaced <CardBody> with <Card.Content> */}
+          <Card.Content className="px-8 pb-8">
+            <Suspense fallback={<Loader />}>
+              <LoginForm />
+            </Suspense>
+          </Card.Content>
 
-        <input
-          placeholder="Email"
-          className="w-full border p-2 mb-2"
-          onChange={(e) =>
-            setForm({ ...form, email: e.target.value })
-          }
-        />
-
-        <input
-          type="password"
-          placeholder="Password"
-          className="w-full border p-2 mb-2"
-          onChange={(e) =>
-            setForm({ ...form, password: e.target.value })
-          }
-        />
-
-        <button className="w-full bg-blue-600 text-white py-2">
-          Login
-        </button>
-
-      </form>
+        </Card>
+      </motion.div>
     </div>
   );
 }
