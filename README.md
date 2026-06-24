@@ -2,8 +2,9 @@
 
 SkillSphere is a highly interactive, full-stack online learning platform designed to connect students with industry experts. The application delivers robust form validations, seamless state routing, and dynamic data binding built for fast rendering cycles.
 
-🔗 **Live Deployment URL**: skiilsphere.vercel.app
-🔗 **gitHub URL**: https://github.com/rawnakwow/skiilsphere.git
+* 🔗 **Live Deployment URL**: https://skiilsphere.vercel.app/ (skiilsphere.vercel.app)
+
+* 🔗 **gitHub URL**: https://github.com/rawnakwow/skiilsphere.git
 
  
 
