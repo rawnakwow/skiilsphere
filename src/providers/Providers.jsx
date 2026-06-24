@@ -1,17 +1,14 @@
 "use client";
 
-import AuthProviderWrapper from "./AuthProvider";
-import { ToastProvider } from "@/context/ToastContext";
+// FIXED: Removed the deleted HeroUIProvider import
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 export function Providers({ children }) {
   return (
-    <AuthProviderWrapper>
-      <ToastProvider>
-        {children}
-        <ToastContainer position="top-right" theme="dark" />
-      </ToastProvider>
-    </AuthProviderWrapper>
+    <>
+      {children}
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
   );
 }

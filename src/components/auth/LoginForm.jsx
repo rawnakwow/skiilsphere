@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter, useSearchParams } from "next/navigation";
-// 1. Core HeroUI components updated to v3 specifications (standalone Input + parent Form)
-import { Form, Input, Button } from "@heroui/react";
+import { Form, TextField, Label, Input, Button } from "@heroui/react";
 import { toast } from "react-toastify";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import Link from "next/link";
 import GoogleLogin from "./GoogleLogin";
+import { FaGoogle } from "react-icons/fa";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -18,7 +18,6 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
 
-  // 2. The missing handleLogin function that resolves the ReferenceError
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -44,67 +43,73 @@ export default function LoginForm() {
   };
 
   return (
-    <>
-      {/* 3. Changed lowercase <form> to HeroUI v3's <Form> component wrapper */}
-      <Form onSubmit={handleLogin} className="flex flex-col gap-5 w-full">
-        <div className="flex flex-col gap-1.5 text-left w-full">
-          <label className="text-sm font-semibold text-default-700 flex gap-1 items-center">
-            Email <span className="text-danger">*</span>
-          </label>
-          <Input
-            isRequired
-            placeholder="Enter your email"
-            type="email"
-            variant="bordered"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            startContent={<FaEnvelope className="text-default-400 shrink-0" />}
-            classNames={{ inputWrapper: "border-2 focus-within:border-primary" }}
-          />
-        </div>
+    <div className="w-full flex flex-col items-center">
+      <Form onSubmit={handleLogin} validationBehavior="native" className="flex flex-col gap-5 w-full">
+        
+        {/* Email Input Wrapper */}
+        <TextField isRequired name="email" className="flex flex-col gap-1.5 text-left w-full">
+          <Label className="text-sm font-semibold text-default-700">Email</Label>
+          <div className="relative flex items-center w-full">
+            <span className="absolute left-3 z-10 text-default-400 pointer-events-none">
+              <FaEnvelope className="shrink-0" />
+            </span>
+            <Input
+              placeholder="Enter your email"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="w-full h-11 pl-10 pr-4 bg-transparent border-2 border-default-200 rounded-xl outline-none transition-colors focus:border-primary text-white"
+            />
+          </div>
+        </TextField>
 
-        <div className="flex flex-col gap-1.5 text-left w-full">
-          <label className="text-sm font-semibold text-default-700 flex gap-1 items-center">
-            Password <span className="text-danger">*</span>
-          </label>
-          <Input
-            isRequired
-            placeholder="Enter your password"
-            type="password"
-            variant="bordered"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            startContent={<FaLock className="text-default-400 shrink-0" />}
-            classNames={{ inputWrapper: "border-2 focus-within:border-primary" }}
-          />
-        </div>
+        {/* Password Input Wrapper */}
+        <TextField isRequired name="password" className="flex flex-col gap-1.5 text-left w-full">
+          <Label className="text-sm font-semibold text-default-700">Password</Label>
+          <div className="relative flex items-center w-full">
+            <span className="absolute left-3 z-10 text-default-400 pointer-events-none">
+              <FaLock className="shrink-0" />
+            </span>
+            <Input
+              placeholder="Enter your password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full h-11 pl-10 pr-4 bg-transparent border-2 border-default-200 rounded-xl outline-none transition-colors focus:border-primary text-white"
+            />
+          </div>
+        </TextField>
 
+        {/* Sign In Button - Ensured relative positioning and z-index */}
         <Button 
           type="submit" 
           color="primary" 
           size="lg" 
-          className="font-bold mt-2 shadow-lg shadow-primary/30 w-full" 
+          className="relative z-20 font-bold mt-2 shadow-lg shadow-primary/30 w-full cursor-pointer h-11" 
           isLoading={isLoading}
         >
           Sign In
         </Button>
       </Form>
 
-      {/* 4. Native horizontal separators replacing defunct Divider elements */}
       <div className="flex items-center gap-4 my-6 w-full">
         <hr className="flex-1 border-t border-divider opacity-50" />
         <p className="text-default-500 text-sm font-medium shrink-0">OR</p>
         <hr className="flex-1 border-t border-divider opacity-50" />
       </div>
 
-      <GoogleLogin />
+      {/* Google Login Container - Added interactive layout wrapper */}
+      <div className="relative z-20 w-full cursor-pointer" >
+        
+        <GoogleLogin />
+      </div>
 
-      <p className="text-center text-sm text-default-500 mt-6">
+      <p className="text-center text-sm text-default-500 mt-6 relative z-20">
         Do not have an account?{" "}
-        <Link href={redirect ? `/signup?redirect=${encodeURIComponent(redirect)}` : "/signup"} className="text-primary font-semibold hover:underline">
+        <Link href={redirect ? `/signup?redirect=${encodeURIComponent(redirect)}` : "/signup"} className="text-primary font-semibold hover:underline cursor-pointer">
           Sign up
         </Link>
       </p>
-    </>
+    </div>
   );
 }

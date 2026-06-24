@@ -1,26 +1,33 @@
+import dns from "node:dns";
+dns.setServers(['8.8.8.8', '8.8.4.4']);
+
 import { betterAuth } from "better-auth";
 import { mongodbAdapter } from "better-auth/adapters/mongodb";
 import { MongoClient } from "mongodb";
 
-// FIX: Completely deleted the dns import and custom dns.setServers block
+// 1. Instantiate the base connection object
+const client = new MongoClient(process.env.MONGODB_URI || "");
 
-if (!global._mongoClient) {
-  global._mongoClient = new MongoClient(process.env.MONGODB_URI);
-}
-const client = global._mongoClient;
-const db = client.db("skillsphere");
+// FIXED: Force Next.js server runtime to connect explicitly before processing auth requests
+await client.connect();
+
+// 2. Safely point to your active database workspace 
+const db = client.db();
 
 export const auth = betterAuth({
-  baseURL: process.env.NEXT_PUBLIC_APP_URL,
-  secret: process.env.BETTER_AUTH_SECRET,
-  database: mongodbAdapter(db),
-  emailAndPassword: {
-    enabled: true,
-  },
+  // FIXED: Explicitly pass the top-level client parameter alongside the database pointer
+  database: mongodbAdapter(db, {
+    client: client
+  }),
+  
   socialProviders: {
     google: {
-      clientId: process.env.GOOGLE_CLIENT_ID || "placeholder_client_id",
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "placeholder_client_secret",
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     },
   },
+  emailAndPassword: {
+    enabled: true,
+    requireEmailVerification: false
+  }
 });

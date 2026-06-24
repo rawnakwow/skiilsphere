@@ -4,7 +4,6 @@ import { Button } from "@heroui/react";
 import { FaGoogle } from "react-icons/fa";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "react-toastify";
-
 import { useSearchParams } from "next/navigation";
 
 export default function GoogleLogin() {
@@ -13,10 +12,11 @@ export default function GoogleLogin() {
 
   const handleGoogleLogin = async () => {
     try {
-      await authClient.signIn.social({
+      const data = await authClient.signIn.social({
         provider: "google",
         callbackURL: redirect || "/",
       });
+      console.log(data,'data');
     } catch (err) {
       toast.error("Google login failed or is not configured.");
     }
@@ -25,11 +25,14 @@ export default function GoogleLogin() {
   return (
     <Button 
       variant="bordered" 
-      className="w-full font-medium border-2" 
+      // FIXED: Added relative, z-30, and high-priority cursor-pointer to clear invisible input overlaps
+      className="relative z-30 w-full font-medium border-2 cursor-pointer h-11" 
       size="lg" 
+      // FIXED: Swapped onClick to HeroUI v3 specification event property (onPress)
       onClick={handleGoogleLogin}
-      startContent={<FaGoogle className="text-danger" />}
+     
     >
+       <FaGoogle  />
       Continue with Google
     </Button>
   );

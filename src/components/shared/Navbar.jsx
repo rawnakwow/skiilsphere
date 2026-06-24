@@ -3,7 +3,9 @@
 import { useState } from "react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-import { Button, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
+// FIXED: Imported buttonVariants to natively apply styles to standard Links
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
+import { buttonVariants } from "@heroui/styles";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 
@@ -47,9 +49,8 @@ export default function Navbar() {
           {isPending ? (
             <div className="w-8 h-8 rounded-full bg-default-200 animate-pulse"></div>
           ) : session ? (
-            /* CLEANED UP: Single clean Dropdown wrapper with no nested duplicates */
             <Dropdown placement="bottom-end">
-              <DropdownTrigger asChild>
+              <DropdownTrigger>
                 <div 
                   role="button"
                   tabIndex={0}
@@ -71,7 +72,6 @@ export default function Navbar() {
                 </div>
               </DropdownTrigger>
 
-              {/* SINGLE ALIGNED MENU: Correct width and layout padding configuration attributes */}
               <DropdownMenu aria-label="Profile Actions" variant="faded" className="w-56">
                 <DropdownItem key="profile" className="h-14 gap-2 border-b border-b-divider/50 rounded-none pointer-events-none">
                   <p className="text-xs font-normal text-default-400">Signed in as</p>
@@ -90,9 +90,14 @@ export default function Navbar() {
               <Link href="/signin" className="hidden lg:inline-block hover:text-primary transition-colors font-medium text-sm">
                 Login
               </Link>
-              <Button as={Link} color="primary" href="/signup" variant="shadow" className="font-medium text-sm">
+              
+              {/* FIXED: Replaced polymorphic <Button as={Link}> with native Next.js <Link> styled via buttonVariants */}
+              <Link 
+                href="/signup" 
+                className={buttonVariants({ variant: "solid", color: "primary", className: "font-medium text-sm shadow-md" })}
+              >
                 Sign Up
-              </Button>
+              </Link>
             </div>
           )}
         </div>

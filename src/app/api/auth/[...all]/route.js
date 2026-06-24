@@ -1,6 +1,6 @@
-// src/app/api/auth/[...all]/route.js
 import { auth } from "@/lib/auth";
+// FIXED: Imported the correct framework engine path and handler function
 import { toNextJsHandler } from "better-auth/next-js";
 
-// FIX: Destructure POST and GET directly from the handler payload object
+// FIXED: Destructure GET and POST directly from the handler utility
 export const { GET, POST } = toNextJsHandler(auth);
