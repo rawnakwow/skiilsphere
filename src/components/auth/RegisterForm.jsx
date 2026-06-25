@@ -9,6 +9,7 @@ import { FaEnvelope, FaLock, FaUser, FaImage } from "react-icons/fa";
 import Link from "next/link";
 import GoogleLogin from "./GoogleLogin";
 
+
 export default function RegisterForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");

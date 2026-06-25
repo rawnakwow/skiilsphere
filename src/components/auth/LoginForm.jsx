@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import Link from "next/link";
 import GoogleLogin from "./GoogleLogin";
-import { FaGoogle } from "react-icons/fa";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");

@@ -22,6 +22,7 @@ export default function GoogleLogin() {
     }
   };
 
+  
   return (
     <Button 
       variant="bordered" 
