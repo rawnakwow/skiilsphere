@@ -26,7 +26,7 @@ export default function SignUp() {
               <RegisterForm />
             </Suspense>
           </Card.Content>
-
+          
         </Card>
       </motion.div>
     </div>
