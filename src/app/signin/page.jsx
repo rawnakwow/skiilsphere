@@ -26,7 +26,6 @@ export default function SignIn() {
               <LoginForm />
             </Suspense>
           </Card.Content>
-
         </Card>
       </motion.div>
     </div>

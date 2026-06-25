@@ -17,6 +17,7 @@ export default function LoginForm() {
   const searchParams = useSearchParams();
   const redirect = searchParams.get("redirect");
 
+  
   const handleLogin = async (e) => {
     e.preventDefault();
     setIsLoading(true);
