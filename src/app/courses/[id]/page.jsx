@@ -5,7 +5,6 @@ import CourseDetailsComponent from "@/components/courses/CourseDetails";
 import Curriculum from "@/components/courses/Curriculum";
 import ProtectedRoute from "@/components/shared/ProtectedRoute";
 import { FaCheckCircle } from "react-icons/fa";
-// 1. Removed Divider from the HeroUI imports
 import { useCourses } from "@/hooks/useCourses";
 
 export default function CourseDetails() {
@@ -13,7 +12,7 @@ export default function CourseDetails() {
   const { getCourseById } = useCourses();
   const course = getCourseById(id);
 
-  if (!course) return null; // Let Loader from ProtectedRoute handle initial state if needed
+  if (!course) return null; 
 
   const curriculumList = [
     "Introduction to the Course",
@@ -45,7 +44,6 @@ export default function CourseDetails() {
               ))}
             </ul>
             
-            {/* 2. Replaced legacy <Divider /> with a styled native HTML <hr /> tag */}
             <hr className="w-full border-t border-divider opacity-50 my-8" />
             
             <h2 className="text-2xl font-bold mb-4">Instructor</h2>

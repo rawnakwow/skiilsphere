@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { authClient } from "@/lib/auth-client";
-// FIXED: Imported buttonVariants to natively apply styles to standard Links
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/react";
 import { buttonVariants } from "@heroui/styles";
 import { useRouter } from "next/navigation";
@@ -27,14 +26,12 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-b-divider bg-background/70 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
         
-        {/* Brand Logo */}
         <div className="flex items-center">
           <Link href="/" className="font-extrabold text-2xl tracking-tighter bg-gradient-to-r from-violet-500 to-fuchsia-500 bg-clip-text text-transparent">
             SkillSphere
           </Link>
         </div>
 
-        {/* Center Desktop Links */}
         <nav className="hidden sm:flex items-center gap-8">
           <Link href="/" className="text-foreground/80 hover:text-primary transition-colors font-medium text-sm">
             Home
@@ -44,7 +41,6 @@ export default function Navbar() {
           </Link>
         </nav>
         
-        {/* Right Side Actions / Dropdown Profile Container */}
         <div className="flex items-center gap-4">
           {isPending ? (
             <div className="w-8 h-8 rounded-full bg-default-200 animate-pulse"></div>
@@ -91,7 +87,6 @@ export default function Navbar() {
                 Login
               </Link>
               
-              {/* FIXED: Replaced polymorphic <Button as={Link}> with native Next.js <Link> styled via buttonVariants */}
               <Link 
                 href="/signup" 
                 className={buttonVariants({ variant: "solid", color: "primary", className: "font-medium text-sm shadow-md" })}

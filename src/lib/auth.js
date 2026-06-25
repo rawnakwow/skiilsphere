@@ -8,14 +8,11 @@ import { MongoClient } from "mongodb";
 // 1. Instantiate the base connection object
 const client = new MongoClient(process.env.MONGODB_URI || "");
 
-// FIXED: Force Next.js server runtime to connect explicitly before processing auth requests
 await client.connect();
 
-// 2. Safely point to your active database workspace 
 const db = client.db();
 
 export const auth = betterAuth({
-  // FIXED: Explicitly pass the top-level client parameter alongside the database pointer
   database: mongodbAdapter(db, {
     client: client
   }),

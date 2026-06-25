@@ -1,6 +1,5 @@
 "use client";
 
-// FIXED: Removed the deleted HeroUIProvider import
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
