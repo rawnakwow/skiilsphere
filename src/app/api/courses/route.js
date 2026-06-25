@@ -3,10 +3,8 @@ import coursesData from "@/data/courses.json";
 
 export async function GET(request) {
   try {
-    // Simulate delay for loader demonstration
     await new Promise(resolve => setTimeout(resolve, 500));
     
-    // Get query parameters for search
     const { searchParams } = new URL(request.url);
     const search = searchParams.get('search');
     
