@@ -18,6 +18,8 @@ export default function LearningTips() {
           <p className="text-default-500 text-lg">Maximize your potential with these study techniques.</p>
         </motion.div>
         
+
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="bg-background/60 backdrop-blur-md">
             <Card.Content className="p-8 text-center">

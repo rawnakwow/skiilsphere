@@ -22,6 +22,9 @@ export default function TopInstructors() {
           <p className="text-default-500 text-lg">Learn from industry experts who have years of real-world experience.</p>
         </motion.div>
         
+
+
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
           {instructorsData.map((instructor, index) => (
             <div key={instructor.id || index}>

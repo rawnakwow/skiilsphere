@@ -76,7 +76,8 @@ export default function Hero() {
       <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} transition-all duration-1000 z-0`}></div>
       
       <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px] z-0"></div>
-
+      
+      
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <AnimatePresence mode="wait">
           <motion.div

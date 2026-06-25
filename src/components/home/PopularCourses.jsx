@@ -13,6 +13,9 @@ export default function PopularCourses() {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
 
+
+
+  
   return (
     <section className="py-20 bg-content1">
       <div className="max-w-7xl mx-auto px-6">
