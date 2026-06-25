@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-// 1. Removed Image from the HeroUI imports
 import { Card } from "@heroui/react";
 import instructorsData from "@/data/instructors.json";
 import { FaStar } from "react-icons/fa";
@@ -28,12 +27,11 @@ export default function TopInstructors() {
             <div key={instructor.id || index}>
               <Card className="h-full border border-divider shadow-sm">
                 <Card.Content className="p-6 flex flex-col items-center text-center">
-                  {/* 2. Replaced <HeroImage /> with a standard native <img> tag */}
                  <Image 
     src={instructor.image} 
     alt={instructor.name} 
-    width={112} // 28 * 4 = 112px
-    height={112} // 28 * 4 = 112px
+    width={112} 
+    height={112} 
     className="w-28 h-28 object-cover rounded-full mb-4 border-2 border-primary/20" 
   />
                   <h3 className="text-lg font-bold mb-1">{instructor.name}</h3>

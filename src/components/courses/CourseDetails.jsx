@@ -48,7 +48,6 @@ export default function CourseDetails({ course }) {
           <Card className="border-2 border-primary shadow-2xl shadow-primary/20 overflow-visible">
             <Card.Content className="p-2">
               
-              {/* FIXED RUNTIME ERROR: Lowercase <img> tag accepts arbitrary text arrays safely */}
               <img 
                 src={course.image} 
                 alt={course.title} 

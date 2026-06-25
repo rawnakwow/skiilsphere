@@ -25,10 +25,8 @@ export default function GoogleLogin() {
   return (
     <Button 
       variant="bordered" 
-      // FIXED: Added relative, z-30, and high-priority cursor-pointer to clear invisible input overlaps
       className="relative z-30 w-full font-medium border-2 cursor-pointer h-11" 
       size="lg" 
-      // FIXED: Swapped onClick to HeroUI v3 specification event property (onPress)
       onClick={handleGoogleLogin}
      
     >

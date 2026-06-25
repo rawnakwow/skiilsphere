@@ -46,7 +46,6 @@ export default function LoginForm() {
     <div className="w-full flex flex-col items-center">
       <Form onSubmit={handleLogin} validationBehavior="native" className="flex flex-col gap-5 w-full">
         
-        {/* Email Input Wrapper */}
         <TextField isRequired name="email" className="flex flex-col gap-1.5 text-left w-full">
           <Label className="text-sm font-semibold text-default-700">Email</Label>
           <div className="relative flex items-center w-full">
@@ -80,7 +79,6 @@ export default function LoginForm() {
           </div>
         </TextField>
 
-        {/* Sign In Button - Ensured relative positioning and z-index */}
         <Button 
           type="submit" 
           color="primary" 
@@ -98,7 +96,6 @@ export default function LoginForm() {
         <hr className="flex-1 border-t border-divider opacity-50" />
       </div>
 
-      {/* Google Login Container - Added interactive layout wrapper */}
       <div className="relative z-20 w-full cursor-pointer" >
         
         <GoogleLogin />

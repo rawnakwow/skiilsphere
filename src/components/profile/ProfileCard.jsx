@@ -1,13 +1,11 @@
 "use client";
 
-// 1. Removed CardBody, CardHeader, Avatar, and Divider from HeroUI imports
 import { Button, Card } from "@heroui/react";
 import Link from "next/link";
 import { FaUserEdit, FaEnvelope, FaCalendarAlt } from "react-icons/fa";
 import Image from "next/image";
 
 export default function ProfileCard({ user }) {
-  // Safe string formatting fallback helper for user register dates
   const joinDate = user?.createdAt ? new Date(user.createdAt).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
@@ -16,15 +14,13 @@ export default function ProfileCard({ user }) {
 
   return (
     <Card className="w-full shadow-xl border border-divider bg-background/60 backdrop-blur-md">
-      {/* 2. Replaced legacy <CardHeader> with <Card.Header> */}
       <Card.Header className="flex flex-col items-center justify-center pt-8 pb-4 text-center">
         <div className="relative border-4 border-primary rounded-full p-1 mb-4 shadow-lg">
-          {/* 3. Replaced legacy <Avatar> with Next.js optimized <Image /> component */}
           <Image
             src={user?.image || `https://ui-avatars.com{encodeURIComponent(user?.name || "User")}&background=6c63ff&color=fff`}
             alt={user?.name || "User Avatar"}
-            width={96} // 24 * 4 = 96px
-            height={96} // 24 * 4 = 96px
+            width={96} 
+            height={96}
             className="w-24 h-24 rounded-full object-cover"
             unoptimized
           />
@@ -35,10 +31,8 @@ export default function ProfileCard({ user }) {
         </p>
       </Card.Header>
 
-      {/* 4. Replaced legacy <Divider /> with a styled native HTML <hr /> tag */}
       <hr className="w-full border-t border-divider opacity-50" />
 
-      {/* 5. Replaced legacy <CardBody> with <Card.Content> */}
       <Card.Content className="p-6 space-y-4">
         <div className="flex items-center gap-4 text-default-600 bg-content2/40 p-3 rounded-xl border border-divider/40">
           <FaEnvelope className="text-primary text-lg shrink-0" />

@@ -73,10 +73,8 @@ export default function Hero() {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Background gradients corresponding to the current slide */}
       <div className={`absolute inset-0 bg-gradient-to-br ${slide.gradient} transition-all duration-1000 z-0`}></div>
       
-      {/* Grid Pattern overlays */}
       <div className="absolute inset-0 opacity-[0.05] bg-[linear-gradient(to_right,#808080_1px,transparent_1px),linear-gradient(to_bottom,#808080_1px,transparent_1px)] bg-[size:24px_24px] z-0"></div>
 
       <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
@@ -128,7 +126,6 @@ export default function Hero() {
         </AnimatePresence>
       </div>
 
-      {/* Navigation Arrows */}
       <button 
         onClick={handlePrev}
         className="absolute left-4 top-1/2 -translate-y-1/2 p-3 rounded-full bg-content1/50 border border-divider hover:bg-content1/80 text-foreground transition-all z-20 focus:outline-none focus:ring-2 focus:ring-primary md:flex hidden"
@@ -144,7 +141,6 @@ export default function Hero() {
         <FaChevronRight className="w-5 h-5" />
       </button>
 
-      {/* Slide Indicators / Dots */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-20">
         {slides.map((_, idx) => (
           <button

@@ -1,6 +1,5 @@
 "use client";
 
-// 1. Removed 'Image as HeroImage' from the HeroUI import statement
 import { Card, Chip, Button } from "@heroui/react";
 import Link from "next/link";
 import { FaStar } from "react-icons/fa";
@@ -13,7 +12,6 @@ export default function CourseCard({ course, hoverEffect = "scale", border = "no
     <Card className={`h-full transition-transform duration-300 ${hoverClass} ${borderClass}`}>
       
       <Card.Content className="p-0">
-        {/* 2. Replaced <HeroImage /> with a standard native <img> tag */}
         <img 
           src={course.image || "/fallback-course.jpg"} 
           alt={course.title} 

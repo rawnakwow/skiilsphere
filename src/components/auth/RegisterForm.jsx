@@ -23,11 +23,9 @@ export default function RegisterForm() {
   e.preventDefault();
   setIsLoading(true);
   
-  // Safe validation for photoURL before sending to server
   let cleanImage = "https://ui-avatars.com" + encodeURIComponent(name);
   if (photoURL && photoURL.trim() !== "") {
     try {
-      // Check if it's a valid structural URL format
       const validUrl = new URL(photoURL);
       cleanImage = validUrl.href;
     } catch (urlError) {
@@ -41,14 +39,12 @@ export default function RegisterForm() {
       email: email.trim(),
       password,
       name: name.trim(),
-      image: cleanImage, // Use sanitized fallback image payload
+      image: cleanImage, 
     });
 
-    // Replace lines 47-50 with this structural inspector:
 if (error) {
-  // FIXED: Using stringification forces the nested properties out of memory
   console.error("Backend Auth Error Details String:", JSON.stringify(error, null, 2));
-  console.dir(error); // Logs the interactive object structure directly
+  console.dir(error); 
   
   toast.error(error.message || "Failed to register. Please try again.");
 }
@@ -69,7 +65,6 @@ else {
     <div className="w-full flex flex-col items-center">
       <Form onSubmit={handleRegister} validationBehavior="native" className="flex flex-col gap-5 w-full">
         
-        {/* Full Name Field */}
         <TextField isRequired name="name" className="flex flex-col gap-1.5 text-left w-full">
           <Label className="text-sm font-semibold text-default-700">Full Name</Label>
           <div className="relative flex items-center w-full">
@@ -86,7 +81,6 @@ else {
           </div>
         </TextField>
 
-        {/* Email Field */}
         <TextField isRequired name="email" className="flex flex-col gap-1.5 text-left w-full">
           <Label className="text-sm font-semibold text-default-700">Email</Label>
           <div className="relative flex items-center w-full">
@@ -103,7 +97,6 @@ else {
           </div>
         </TextField>
 
-        {/* Photo URL Field */}
         <TextField name="photoURL" className="flex flex-col gap-1.5 text-left w-full">
           <Label className="text-sm font-semibold text-default-700">Photo URL (Optional)</Label>
           <div className="relative flex items-center w-full">
@@ -120,7 +113,6 @@ else {
           </div>
         </TextField>
 
-        {/* Password Field */}
         <TextField isRequired name="password" className="flex flex-col gap-1.5 text-left w-full">
           <Label className="text-sm font-semibold text-default-700">Password</Label>
           <div className="relative flex items-center w-full">
@@ -137,7 +129,6 @@ else {
           </div>
         </TextField>
 
-        {/* Interactive Layer Sign Up Button */}
         <Button 
           type="submit" 
           color="primary" 
@@ -155,7 +146,6 @@ else {
         <hr className="flex-1 border-t border-divider opacity-50" />
       </div>
 
-      {/* Interactive Layer Google Login */}
       <div className="relative z-20 w-full cursor-pointer">
               
               <GoogleLogin />

@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-// 1. Removed CardBody from the HeroUI imports
 import { Card } from "@heroui/react";
 import { FaClock, FaCheckCircle, FaLightbulb } from "react-icons/fa";
 
@@ -21,7 +20,6 @@ export default function LearningTips() {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <Card className="bg-background/60 backdrop-blur-md">
-            {/* 2. Replaced CardBody with Card.Content */}
             <Card.Content className="p-8 text-center">
               <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mx-auto mb-6 text-primary text-2xl">
                 <FaClock />
@@ -32,7 +30,6 @@ export default function LearningTips() {
           </Card>
 
           <Card className="bg-background/60 backdrop-blur-md">
-            {/* 3. Replaced CardBody with Card.Content */}
             <Card.Content className="p-8 text-center">
               <div className="w-16 h-16 rounded-full bg-secondary/20 flex items-center justify-center mx-auto mb-6 text-secondary text-2xl">
                 <FaCheckCircle />
@@ -43,7 +40,6 @@ export default function LearningTips() {
           </Card>
 
           <Card className="bg-background/60 backdrop-blur-md">
-            {/* 4. Replaced CardBody with Card.Content */}
             <Card.Content className="p-8 text-center">
               <div className="w-16 h-16 rounded-full bg-warning/20 flex items-center justify-center mx-auto mb-6 text-warning text-2xl">
                 <FaLightbulb />
